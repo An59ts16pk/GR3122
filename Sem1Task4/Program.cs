@@ -43,7 +43,7 @@ if (inputLineA != null && inputLineB != null && inputLineC != null)  //пров�
             Console.WriteLine(inputNumberC);                        //выводим в консоль третье число 
         }
     }
-    // вариант 2
+    // Вариант 2
     Console.WriteLine("\nВариант 2.");
     int max = inputNumberA;                              //предполагаем, что макимальное первое число   
     string maxString = "первое, A = ";                   //вспомогательная переменная о максимальном числе
@@ -59,4 +59,13 @@ if (inputLineA != null && inputLineB != null && inputLineC != null)  //пров�
     }
     Console.Write("\nМаксимальное " + maxString);
     Console.WriteLine(max);                              //выводим в консоль максимальное
+    // Вариант 3 (тернарный оператор).
+    Console.WriteLine("\nВариант 3 (использован тернарный оператор с вложением).");
+    max = inputNumberA > inputNumberB ? inputNumberA > inputNumberC ? inputNumberA : inputNumberC : inputNumberB > inputNumberC ? inputNumberB : inputNumberC;
+    Console.WriteLine("\nМаксимальное из трёх чисел = " + max);
+    // Вариант 4 (использование Math.Max()).
+    Console.WriteLine("\nВариант 4 (использование Math.Max()).");
+    int maxMx1 = Math.Max(inputNumberA, inputNumberB);
+    int maxMx2 = Math.Max(maxMx1, inputNumberC);
+    Console.WriteLine("\nМаксимальное из трёх чисел = " + maxMx2);
 }
