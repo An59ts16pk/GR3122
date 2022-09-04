@@ -13,8 +13,7 @@ if (inputLineA != null && inputLineB != null && inputLineC != null)  //пров�
 {
     int inputNumberA = int.Parse(inputLineA);
     int inputNumberB = int.Parse(inputLineB);
-    int inputNumberC = int.Parse(inputLineC);                        //парсим три числа в вещественные и преобразуем в int
-
+    int inputNumberC = int.Parse(inputLineC);                       //парсим три числа в вещественные и преобразуем в int
     // Вариант 1
     Console.WriteLine("\nВариант 1.");
     if (inputNumberA > inputNumberB)                                //сравниваем первое со вторым
@@ -61,11 +60,15 @@ if (inputLineA != null && inputLineB != null && inputLineC != null)  //пров�
     Console.WriteLine(max);                              //выводим в консоль максимальное
     // Вариант 3 (тернарный оператор).
     Console.WriteLine("\nВариант 3 (использован тернарный оператор с вложением).");
-    max = inputNumberA > inputNumberB ? inputNumberA > inputNumberC ? inputNumberA : inputNumberC : inputNumberB > inputNumberC ? inputNumberB : inputNumberC;
-    Console.WriteLine("\nМаксимальное из трёх чисел = " + max);
+    int numA = inputNumberA;
+    int numB = inputNumberB;
+    int numC = inputNumberC;
+    int max1 = numA > numB ? numA > numC ? numA : numC : numB > numC ? numB : numC;
+    // или другая запись
+    int max2 = ((numA > numB) ? numA : numB) > numC ? (((numA > numB) ? numA : numB)) : numC;
+    Console.WriteLine("\nМаксимальное из трёх чисел = " + max2);
     // Вариант 4 (использование Math.Max()).
     Console.WriteLine("\nВариант 4 (использование Math.Max()).");
-    int maxMx1 = Math.Max(inputNumberA, inputNumberB);
-    int maxMx2 = Math.Max(maxMx1, inputNumberC);
-    Console.WriteLine("\nМаксимальное из трёх чисел = " + maxMx2);
+    int maxMx = Math.Max(inputNumberA, Math.Max(inputNumberB, inputNumberC));
+    Console.WriteLine("\nМаксимальное из трёх чисел = " + maxMx);
 }
