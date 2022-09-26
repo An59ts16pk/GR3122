@@ -13,88 +13,40 @@ void PrintData(string line)
 }
 
 // Метод спирального заполнение двумерного массива числами.
-// (Хорошо заполняет квадратные и прямоугольные с небольшим
-// изменением в разнице количества строк и столбцов, 
-// разница примерно два. Дальше пыхтеть не стал, 
-// время поджимает и задача судя по условию квадратный массив.)
 int[,] SpiralFill2DArray(int row, int col)
 {
-    int[,] array2D = new int[row, col];
-    int pet;
-    int p = 2; // кол. проходов массива
-    if (row <= col) pet = row;
-    else pet = col;
-    if (pet <= 4) p = 2;
-    else
+    int[,] arr2D = new int[row, col];
+    int n = row; // строки
+    int m = col; // столбцы
+    // границы заполнения
+    int ibeg = 0, ifin = 0, jbeg = 0, jfin = 0;
+
+    int count = 1; // счётчик заполнения
+    int i = 0; // старт строк
+    int j = 0; // старт столбцов
+
+    while (count <= n * m)
     {
-        // определяем количество проходов
-        // от размерности строк или столбцов
-        while(pet > 4)
-        {
-            if (pet % 2 != 0)
-            {
-                p++;
-            }
-            pet--;
-        }
-    }
-    
-    int count = 1; //счётчик заполнения
-    int i = 0; // старт заполнения строки
-    int j = 0; // старт заполнения столбца
-    // граница заполнения строк
-    int dsi = 0;
-    int dei = row-1;
-    // граница заполнения столбцов
-    int dsj = 0;
-    int dej = col-1;
-    
-    while(p > 0)
-    {
-        // шаг 1
-        while(j >= dsj && j <= dej)
-        {
-            array2D[i,j] = count;
+        arr2D[i,j] = count;
+        if (i == ibeg && j < m - jfin - 1)
             j++;
-            count++;
-        }
-        i++;
-        j--;
-        // шаг 2
-        while(i >= dsi && i <= dei)
-        {
-            array2D[i,j] = count;
+        else if (j == m - jfin - 1 && i < n - ifin - 1)
             i++;
-            count++;
-        }
-        i--;
-        j--;
-        // шаг 3
-        while(j >= dsj && j <= dej)
-        {
-            array2D[i,j] = count;
+        else if (i == n - ifin - 1 && j > jbeg)
             j--;
-            count++;
-        }
-        j++;
-        i--;
-        // шаг 4
-        while(i > dsi && i <= dei)
-        {
-            array2D[i,j] = count;
+        else
             i--;
-            count++;
+
+        if ((i == ibeg + 1) && (j == jbeg) && (jbeg != m - jfin - 1))
+        {
+            ibeg++;
+            ifin++;
+            jbeg++;
+            jfin++;
         }
-                
-        p--;
-        i++;
-        j++;
-        dsi++;
-        dei--;
-        dsj++;
-        dej--;
+        count++;
     }
-    return array2D;
+    return arr2D;
 }
 
 // Печать двумерного массива.
@@ -111,7 +63,7 @@ void Print2DArray(int[,] matr)
     }
 }
 
-int[,] result = SpiralFill2DArray(4, 4);
+int[,] result = SpiralFill2DArray(6, 9);
 
 PrintData("\nРезультат: \n");
 Print2DArray(result);
